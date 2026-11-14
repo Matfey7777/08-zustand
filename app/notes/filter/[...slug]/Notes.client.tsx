@@ -13,7 +13,11 @@ import Pagination from "@/components/Pagination/Pagination";
 
 import css from "./Notes.module.css";
 
-export default function NotesClient() {
+interface NotesClientProps {
+  tag: string;
+}
+
+export default function NotesClient({ tag }: NotesClientProps) {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
   const [searchValue, setSearchValue] = useState("");
@@ -27,8 +31,14 @@ export default function NotesClient() {
   }, 500);
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["notes", page, search],
-    queryFn: () => fetchNotes({ page, perPage, search }),
+    queryKey: ["notes", page, search, tag],
+    queryFn: () =>
+      fetchNotes({
+        page,
+        perPage,
+        search,
+        tag: tag === "all" ? undefined : tag,
+      }),
     placeholderData: keepPreviousData,
   });
 

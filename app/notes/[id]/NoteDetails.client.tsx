@@ -30,7 +30,7 @@ export default function NoteDetailsClient() {
 
   return (
     <main className={css.container}>
-      <Link href="/notes" className={css.backLink}>
+      <Link href="/notes/filter/all" className={css.backLink}>
         ← Back to notes
       </Link>
 
